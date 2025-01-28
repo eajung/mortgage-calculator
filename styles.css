@@ -1,55 +1,179 @@
+/* Sunset-inspired gradient background */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(45deg, #ff7e5f, #feb47b, #ff6a6a, #ff4e4e, #ff2a2a);
+    background-size: 400% 400%;
+    animation: sunsetGradient 15s ease infinite;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
-.calculator {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+/* Sunset gradient animation */
+@keyframes sunsetGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
+/* Container for both draggable elements */
+.container-wrapper {
+    display: flex;
+    gap: 20px; /* Space between the two containers */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px; /* Adjust as needed */
 }
 
-label {
+/* Draggable containers */
+.draggable {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 25px; /* Increased padding */
+    width: 400px; /* Increased width */
+    cursor: grab;
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+}
+
+.draggable .header {
+    background: linear-gradient(45deg, #ff7e5f, #feb47b);
+    color: white;
+    padding: 15px; /* Increased padding */
+    border-radius: 8px 8px 0 0;
+    text-align: center;
+    font-weight: bold;
+    cursor: grab;
+    margin: -25px -25px 15px -25px; /* Adjusted margin to match new padding */
+    font-size: 18px; /* Larger font size */
+}
+
+.draggable:active, .draggable .header:active {
+    cursor: grabbing;
+}
+
+/* Form styling */
+form label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 10px; /* Increased margin */
+    color: #333;
+    font-weight: bold;
+    font-size: 14px; /* Larger font size */
 }
 
-input {
+form input {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 12px; /* Increased padding */
+    margin-bottom: 15px; /* Increased margin */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-size: 14px; /* Larger font size */
 }
 
-button {
+form input:focus {
+    outline: none;
+    border-color: #ff7e5f;
+    box-shadow: 0 0 5px rgba(255, 126, 95, 0.5);
+}
+
+form button {
     width: 100%;
-    padding: 10px;
-    background-color: #28a745;
-    color: #fff;
+    padding: 15px; /* Increased padding */
+    background: linear-gradient(45deg, #ff7e5f, #feb47b);
+    color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 16px; /* Larger font size */
+    font-weight: bold;
+    transition: background 0.3s ease;
 }
 
-button:hover {
-    background-color: #218838;
+form button:hover {
+    background: linear-gradient(45deg, #feb47b, #ff7e5f);
 }
 
+/* Result styling */
 #result {
-    margin-top: 20px;
-    font-size: 18px;
+    margin-top: 15px; /* Increased margin */
+    font-size: 16px; /* Larger font size */
+    color: #333;
+}
+
+.result-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px; /* Increased margin */
+    font-size: 14px; /* Larger font size */
+}
+
+.result-table th, .result-table td {
+    padding: 10px; /* Increased padding */
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.result-table .header {
+    background: linear-gradient(45deg, #ff7e5f, #feb47b);
+    color: white;
+    font-weight: bold;
+}
+
+.result-table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.result-table tr:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Toggle Switch Styling */
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.toggle-switch label {
+    margin-right: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.toggle-switch input[type="checkbox"] {
+    appearance: none;
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-switch input[type="checkbox"]::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+}
+
+.toggle-switch input[type="checkbox"]:checked {
+    background-color: #ff7e5f;
+}
+
+.toggle-switch input[type="checkbox"]:checked::before {
+    transform: translateX(20px);
 }
